@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://pagina-web-crud-backend.onrender.com'],
+    credentials: true
+}));
 app.use(express.json());
 
 // Conexión a MongoDB Atlas
@@ -66,4 +69,4 @@ app.put('/api/compradores/:id', async (req, res) => {
     }
 });
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Servidor backend en http://localhost:${PORT}`));
+app.listen(process.env.PORT || PORT, () => console.log(`Servidor backend en puerto ${process.env.PORT || PORT}`));
